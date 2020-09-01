@@ -20,20 +20,14 @@ const hostName = new URL(req.body.url);
 const a2 = hostName.hostname;
     dns.resolveTxt(a2, (err, records) => {
         console.log(records);
-            if(records.flat().indexOf(req.body.txt) >0)
+            if(records.flat().indexOf(req.body.txt) >= 0)
             {
             res.send(req.body.txt)
+            }else{
+                res.send("Not Found")
             }
     });   
 });
-
-const givenUrl = (url)=>{
-    const hostName = new URL(url);
-    const a2 = hostName.hostname;
-    return dns.resolveTxt(a2, (err, records) => {return records});
-};
-
-
 
 const mData = (url) => {
     return metafetch.fetch(url, { 
